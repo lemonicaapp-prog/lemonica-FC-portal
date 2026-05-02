@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LEMONADE by Lemonica — Europe Franchise Portal</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
@@ -51,29 +53,6 @@
       display: block;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: rgba(255,255,255,0.85);
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      padding-bottom: 4px;
-      border-bottom: 2px solid transparent;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--white);
-      border-bottom-color: var(--yellow);
-    }
-
     .nav-right {
       display: flex;
       align-items: center;
@@ -85,14 +64,20 @@
       color: rgba(255,255,255,0.6);
     }
 
-    .nav-badge {
+    .btn-logout {
       background: var(--yellow);
       color: var(--brown);
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 20px;
       border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      font-family: "DM Sans", sans-serif;
+      transition: background 0.2s;
+      letter-spacing: 0.02em;
     }
+    .btn-logout:hover { background: #e0b600; }
 
     /* ── HERO ── */
     .hero {
@@ -139,7 +124,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 50% 110% at 50% 50%, rgba(255,255,255,0.9) 25%, transparent 80%);
+      background: radial-gradient(ellipse 60% 120% at 50% 48%, rgba(255,255,255,0.96) 30%, rgba(255,255,255,0.5) 65%, transparent 90%);
       pointer-events: none;
       z-index: 2;
     }
@@ -538,16 +523,8 @@
     <a href="#" class="nav-logo">
       <img src="logo-icon.png" alt="LEMONADE by Lemonica" />
     </a>
-    <ul class="nav-links">
-      <li><a href="#" class="active">Home</a></li>
-      <li><a href="#">Resources</a></li>
-      <li><a href="#">Updates</a></li>
-      <li><a href="#">Training</a></li>
-      <li><a href="#">Operations</a></li>
-      <li><a href="#">Contacts</a></li>
-    </ul>
     <div class="nav-right">
-      <span class="nav-badge">🔒 Private Portal</span>
+      <button class="btn-logout" onclick="logout()">🔒 Log Out</button>
     </div>
   </nav>
 
@@ -870,6 +847,27 @@
   <script>
     const CORRECT_PASSWORD = 'LemonadeEurope2026';
     const SESSION_KEY = 'lemonica_portal_auth';
+    const TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
+    let logoutTimer;
+
+    function showGate() {
+      sessionStorage.removeItem(SESSION_KEY);
+      document.getElementById('password-gate').classList.remove('hidden');
+      document.getElementById('gate-input').value = '';
+      document.getElementById('gate-error').textContent = '';
+      clearTimeout(logoutTimer);
+    }
+
+    function logout() {
+      showGate();
+    }
+
+    function resetTimer() {
+      clearTimeout(logoutTimer);
+      logoutTimer = setTimeout(() => {
+        showGate();
+      }, TIMEOUT_MS);
+    }
 
     function checkPassword() {
       const input = document.getElementById('gate-input').value;
@@ -878,6 +876,7 @@
         sessionStorage.setItem(SESSION_KEY, 'true');
         document.getElementById('password-gate').classList.add('hidden');
         error.textContent = '';
+        resetTimer();
       } else {
         error.textContent = 'Incorrect password. Please try again.';
         document.getElementById('gate-input').value = '';
@@ -889,8 +888,16 @@
       if (e.key === 'Enter') checkPassword();
     });
 
+    // Reset timer on any user activity
+    ['mousemove','keydown','click','scroll','touchstart'].forEach(evt =>
+      document.addEventListener(evt, () => {
+        if (sessionStorage.getItem(SESSION_KEY) === 'true') resetTimer();
+      }, { passive: true })
+    );
+
     if (sessionStorage.getItem(SESSION_KEY) === 'true') {
       document.getElementById('password-gate').classList.add('hidden');
+      resetTimer();
     }
   </script>
 
