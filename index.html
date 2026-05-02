@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LEMONADE by Lemonica — Europe Franchise Portal</title>
+  <title>LEMONADE by Lemonica — France Franchise Portal</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
@@ -35,8 +35,8 @@
 
     /* ── NAV ── */
     nav {
-      background: var(--brown);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -61,7 +61,7 @@
 
     .nav-user {
       font-size: 13px;
-      color: rgba(255,255,255,0.6);
+      color: var(--gray);
     }
 
     .btn-logout {
@@ -82,65 +82,69 @@
     /* ── HERO ── */
     .hero {
       position: relative;
+      background: #fff;
       overflow: hidden;
-      padding: 56px 32px 48px;
+      padding: 40px 32px 36px;
       text-align: center;
-      background: #dde8e4;
-      min-height: 220px;
       display: flex;
       align-items: center;
       justify-content: center;
+      min-height: 200px;
     }
 
+    /* Small lemon photos - pushed to far left/right edges */
     .hero-bg-left {
       position: absolute;
-      top: 0; left: 0;
-      width: 50%;
-      height: 100%;
+      top: 50%;
+      left: -60px;
+      transform: translateY(-50%);
+      width: 320px;
+      height: 320px;
       object-fit: cover;
-      object-position: right center;
+      object-position: center;
+      border-radius: 50%;
+      opacity: 0.55;
     }
 
     .hero-bg-right {
       position: absolute;
-      top: 0; right: 0;
-      width: 50%;
-      height: 100%;
+      top: 50%;
+      right: -60px;
+      transform: translateY(-50%);
+      width: 320px;
+      height: 320px;
       object-fit: cover;
-      object-position: left center;
-      transform: scaleX(-1);
+      object-position: center;
+      border-radius: 50%;
+      opacity: 0.55;
     }
 
+    /* Fade out photos near center so logo is clear */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(255,255,255,0.45);
+      background: linear-gradient(to right,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,1) 28%,
+        rgba(255,255,255,1) 72%,
+        rgba(255,255,255,0) 100%
+      );
       pointer-events: none;
       z-index: 1;
     }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 60% 120% at 50% 48%, rgba(255,255,255,0.96) 30%, rgba(255,255,255,0.5) 65%, transparent 90%);
-      pointer-events: none;
-      z-index: 2;
-    }
-
     .hero-content {
       position: relative;
-      z-index: 3;
+      z-index: 2;
       width: 100%;
     }
 
     .hero-logo {
       display: block;
-      margin: 0 auto 14px;
+      margin: 0 auto 10px;
       height: auto;
-      width: min(420px, 80vw);
-      filter: drop-shadow(0 2px 12px rgba(255,255,255,0.6));
+      width: min(460px, 75vw);
     }
 
     .hero-sub {
@@ -149,11 +153,11 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--brown-mid);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
     .hero-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 500;
       color: var(--brown);
     }
@@ -164,7 +168,7 @@
     }
 
     .hero-welcome {
-      margin-top: 12px;
+      margin-top: 10px;
       font-size: 15px;
       font-weight: 500;
       color: var(--brown);
@@ -534,7 +538,7 @@
     <img src="hero-bg2.png" alt="" class="hero-bg-right" />
     <div class="hero-content">
     <img src="logo-full.png" alt="LEMONADE by Lemonica" class="hero-logo" />
-    <p class="hero-sub">Europe Franchisee Portal</p>
+    <p class="hero-sub">France Franchisee Portal</p>
     <p class="hero-title">Citronnade Naturelle — <span>France & Europe</span></p>
     <p class="hero-welcome">Welcome, Olivier. Everything you need to launch and operate is here.</p>
     </div>
@@ -548,7 +552,7 @@
       <div class="about-card">
         <div class="about-card-inner">
           <img src="logo-icon.png" class="about-icon" alt="Lemonica icon" />
-          <p>A premium Japanese lemonade brand, born in 2017.<br />Now arriving in <strong>South France</strong> and across Europe.</p>
+          <p>A premium Japanese lemonade brand, born in 2017.<br />Now arriving in <strong>South France</strong>.</p>
         </div>
         <a href="#" class="btn-link">About the Brand →</a>
       </div>
@@ -713,7 +717,7 @@
   <div id="password-gate">
     <div class="gate-box">
       <img src="logo-icon.png" alt="LEMONADE by Lemonica" class="gate-logo" />
-      <p class="gate-title">Europe Franchisee Portal<br>Private Access</p>
+      <p class="gate-title">France Franchisee Portal<br>Private Access</p>
       <label class="gate-label">PASSWORD</label>
       <input
         type="password"
