@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LEMONADE by Lemonica — Europe Franchise Portal</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -29,8 +31,8 @@
 
     /* ── NAV ── */
     nav {
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
+      background: var(--brown);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
       position: sticky;
       top: 0;
       z-index: 100;
@@ -54,7 +56,7 @@
 
     .nav-links a {
       text-decoration: none;
-      color: var(--brown-mid);
+      color: rgba(255,255,255,0.7);
       font-size: 14px;
       font-weight: 500;
       letter-spacing: 0.02em;
@@ -65,7 +67,7 @@
 
     .nav-links a:hover,
     .nav-links a.active {
-      color: var(--brown);
+      color: var(--white);
       border-bottom-color: var(--yellow);
     }
 
@@ -77,7 +79,7 @@
 
     .nav-user {
       font-size: 13px;
-      color: var(--gray);
+      color: rgba(255,255,255,0.6);
     }
 
     .nav-badge {
@@ -92,67 +94,89 @@
     /* ── HERO ── */
     .hero {
       position: relative;
-      background: var(--brown);
       overflow: hidden;
-      padding: 60px 32px 52px;
+      padding: 56px 32px 48px;
       text-align: center;
+      background: #dde8e4;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-bg-left {
+      position: absolute;
+      top: 0; left: 0;
+      width: 50%;
+      height: 100%;
+      object-fit: cover;
+      object-position: right center;
+    }
+
+    .hero-bg-right {
+      position: absolute;
+      top: 0; right: 0;
+      width: 50%;
+      height: 100%;
+      object-fit: cover;
+      object-position: left center;
+      transform: scaleX(-1);
     }
 
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 110%, rgba(245,200,0,0.18) 0%, transparent 70%);
+      background: rgba(255,255,255,0.45);
       pointer-events: none;
+      z-index: 1;
     }
 
-    .hero-lemon-left,
-    .hero-lemon-right {
+    .hero::after {
+      content: '';
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.12;
-      width: 220px;
+      inset: 0;
+      background: radial-gradient(ellipse 50% 110% at 50% 50%, rgba(255,255,255,0.9) 25%, transparent 80%);
+      pointer-events: none;
+      z-index: 2;
     }
 
-    .hero-lemon-left { left: -40px; }
-    .hero-lemon-right { right: -40px; transform: translateY(-50%) scaleX(-1); }
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+    }
 
     .hero-logo {
       display: block;
-      margin: 0 auto 8px;
-      height: 70px;
-      filter: brightness(0) invert(1);
-      position: relative;
+      margin: 0 auto 10px;
+      height: 80px;
     }
 
     .hero-sub {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 300;
+      font-size: 12px;
+      font-weight: 400;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
-      margin-bottom: 10px;
-      position: relative;
+      color: var(--brown-mid);
+      margin-bottom: 6px;
     }
 
     .hero-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 400;
-      color: rgba(255,255,255,0.75);
-      position: relative;
+      color: var(--brown);
     }
 
     .hero-title span {
-      color: var(--yellow);
+      font-weight: 600;
+      color: var(--brown-mid);
     }
 
     .hero-welcome {
-      margin-top: 16px;
+      margin-top: 12px;
       font-size: 15px;
-      color: rgba(255,255,255,0.9);
-      position: relative;
+      color: var(--brown);
     }
 
     /* ── MAIN ── */
@@ -523,12 +547,14 @@
 
   <!-- HERO -->
   <div class="hero">
-    <img src="logo-icon.png" class="hero-lemon-left" alt="" />
-    <img src="logo-icon.png" class="hero-lemon-right" alt="" />
+    <img src="hero-bg.png" alt="" class="hero-bg-left" />
+    <img src="hero-bg2.png" alt="" class="hero-bg-right" />
+    <div class="hero-content">
     <img src="logo-full.png" alt="LEMONADE by Lemonica" class="hero-logo" />
     <p class="hero-sub">Europe Franchisee Portal</p>
     <p class="hero-title">Citronnade Naturelle — <span>France & Europe</span></p>
     <p class="hero-welcome">Welcome, Olivier. Everything you need to launch and operate is here.</p>
+    </div>
   </div>
 
   <!-- MAIN -->
@@ -699,6 +725,168 @@
     <span>|</span>
     © 2026
   </footer>
+
+  <!-- PASSWORD GATE OVERLAY -->
+  <div id="password-gate">
+    <div class="gate-box">
+      <img src="logo-full.png" alt="LEMONADE by Lemonica" class="gate-logo" />
+      <p class="gate-title">Europe Franchisee Portal &mdash; Private Access</p>
+      <label class="gate-label">PASSWORD</label>
+      <input
+        type="password"
+        id="gate-input"
+        class="gate-input"
+        placeholder="Enter your password"
+        autocomplete="current-password"
+      />
+      <button class="gate-btn" onclick="checkPassword()">Enter Portal &rarr;</button>
+      <p class="gate-error" id="gate-error"></p>
+      <p class="gate-footer">LEMONADE by Lemonica &mdash; Confidential</p>
+    </div>
+  </div>
+
+  <style>
+    /* ── PASSWORD GATE ── */
+    #password-gate {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #password-gate.hidden { display: none; }
+
+    .gate-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 8px 40px rgba(45,36,22,0.10);
+      padding: 40px 36px 36px;
+      width: calc(100% - 32px);
+      max-width: 380px;
+      text-align: center;
+    }
+
+    .gate-logo {
+      height: 48px;
+      margin: 0 auto 6px;
+      display: block;
+    }
+
+    .gate-logo-icon {
+      height: 52px;
+      margin: 0 auto 16px;
+      display: block;
+    }
+
+    .gate-title {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .gate-label {
+      font-size: 11px;
+      color: var(--gray);
+      text-align: left;
+      display: block;
+      margin-bottom: 7px;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+    }
+
+    .gate-input {
+      width: 100%;
+      background: var(--cream);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 15px;
+      color: var(--brown);
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-bottom: 14px;
+    }
+
+    .gate-input:focus {
+      border-color: var(--yellow);
+    }
+
+    .gate-input::placeholder {
+      color: #c8bfae;
+    }
+
+    .gate-btn {
+      width: 100%;
+      background: var(--yellow);
+      color: var(--brown);
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .gate-btn:hover { background: #e0b600; }
+    .gate-btn:active { transform: scale(0.98); }
+
+    .gate-error {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #d94f4f;
+      min-height: 18px;
+    }
+
+    .gate-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 24px 0 16px;
+    }
+
+    .gate-footer {
+      font-size: 11px;
+      color: #c8bfae;
+      letter-spacing: 0.05em;
+    }
+  </style>
+
+  <script>
+    const CORRECT_PASSWORD = 'LemonadeEurope2026';
+    const SESSION_KEY = 'lemonica_portal_auth';
+
+    function checkPassword() {
+      const input = document.getElementById('gate-input').value;
+      const error = document.getElementById('gate-error');
+      if (input === CORRECT_PASSWORD) {
+        sessionStorage.setItem(SESSION_KEY, 'true');
+        document.getElementById('password-gate').classList.add('hidden');
+        error.textContent = '';
+      } else {
+        error.textContent = 'Incorrect password. Please try again.';
+        document.getElementById('gate-input').value = '';
+        document.getElementById('gate-input').focus();
+      }
+    }
+
+    document.getElementById('gate-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkPassword();
+    });
+
+    if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+      document.getElementById('password-gate').classList.add('hidden');
+    }
+  </script>
 
 </body>
 </html>
