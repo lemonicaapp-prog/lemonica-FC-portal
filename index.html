@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LEMONADE by Lemonica — Europe Franchise Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --yellow: #F5C800;
+      --yellow-light: #FFF8D6;
+      --brown: #2D2416;
+      --brown-mid: #5C4A28;
+      --cream: #FDFAF2;
+      --white: #ffffff;
+      --gray: #8a8070;
+      --border: #E8E0CC;
+      --shadow: 0 2px 16px rgba(45,36,22,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--brown);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-logo img {
+      height: 36px;
+      display: block;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--brown-mid);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--brown);
+      border-bottom-color: var(--yellow);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-user {
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .nav-badge {
+      background: var(--yellow);
+      color: var(--brown);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      background: var(--brown);
+      overflow: hidden;
+      padding: 60px 32px 52px;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 110%, rgba(245,200,0,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-lemon-left,
+    .hero-lemon-right {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.12;
+      width: 220px;
+    }
+
+    .hero-lemon-left { left: -40px; }
+    .hero-lemon-right { right: -40px; transform: translateY(-50%) scaleX(-1); }
+
+    .hero-logo {
+      display: block;
+      margin: 0 auto 8px;
+      height: 70px;
+      filter: brightness(0) invert(1);
+      position: relative;
+    }
+
+    .hero-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .hero-title {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.75);
+      position: relative;
+    }
+
+    .hero-title span {
+      color: var(--yellow);
+    }
+
+    .hero-welcome {
+      margin-top: 16px;
+      font-size: 15px;
+      color: rgba(255,255,255,0.9);
+      position: relative;
+    }
+
+    /* ── MAIN ── */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    /* ── ABOUT BRAND ── */
+    .about-card {
+      background: var(--yellow-light);
+      border: 1px solid #E8D870;
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .about-card-inner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .about-icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .about-card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--brown);
+    }
+
+    .btn-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brown);
+      text-decoration: none;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border: 1.5px solid var(--brown-mid);
+      border-radius: 20px;
+      transition: background 0.2s;
+    }
+
+    .btn-link:hover { background: rgba(45,36,22,0.07); }
+
+    /* ── SECTION ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .section-header p {
+      font-size: 13px;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    /* ── RESOURCE GRID ── */
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .resource-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .resource-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-2px);
+    }
+
+    .resource-card .icon {
+      font-size: 28px;
+      margin-bottom: 4px;
+    }
+
+    .resource-card h3 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brown);
+      line-height: 1.3;
+    }
+
+    .resource-card p {
+      font-size: 11px;
+      color: var(--gray);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .btn-download {
+      margin-top: 6px;
+      background: var(--yellow);
+      color: var(--brown);
+      border: none;
+      border-radius: 20px;
+      padding: 7px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-download:hover { background: #e0b600; }
+
+    /* ── SIDEBAR ── */
+    .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+    .sidebar-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .sidebar-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .sidebar-card-header h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .update-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .update-item:last-of-type { border-bottom: none; }
+
+    .update-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--yellow-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .update-content h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .update-content ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .update-content li {
+      font-size: 12px;
+      color: var(--gray);
+      margin-bottom: 2px;
+    }
+
+    .update-content li::before {
+      content: '• ';
+      color: var(--yellow);
+      font-weight: 700;
+    }
+
+    .update-date {
+      font-size: 11px;
+      color: var(--gray);
+      font-style: italic;
+    }
+
+    .view-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brown-mid);
+      text-decoration: none;
+      margin-top: 10px;
+    }
+
+    .view-all:hover { color: var(--brown); }
+
+    .badge-new {
+      background: var(--yellow);
+      color: var(--brown);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    .milestone-item {
+      display: flex;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .milestone-item:last-child { border-bottom: none; }
+    .milestone-dot {
+      width: 8px; height: 8px;
+      background: var(--yellow);
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .milestone-item p { font-size: 13px; font-weight: 500; }
+    .milestone-item span { font-size: 11px; color: var(--gray); }
+
+    /* ── WHATSAPP BANNER ── */
+    .whatsapp-banner {
+      background: var(--yellow-light);
+      border: 1.5px solid #E8D870;
+      border-radius: 12px;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .whatsapp-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .whatsapp-icon {
+      font-size: 28px;
+    }
+
+    .whatsapp-banner h3 {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .whatsapp-banner p {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    .btn-join {
+      background: var(--brown);
+      color: var(--white);
+      padding: 10px 22px;
+      border-radius: 22px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .btn-join:hover { background: #4a3a1e; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    footer span { margin: 0 12px; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+      .resource-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 520px) {
+      nav { padding: 0 16px; }
+      .hero { padding: 40px 16px 36px; }
+      .hero-logo { height: 48px; }
+      .main { padding: 24px 16px 60px; }
+      .resource-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      .about-card { flex-direction: column; align-items: flex-start; }
+      .whatsapp-banner { flex-direction: column; align-items: flex-start; }
+      .resource-card { padding: 14px 10px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="logo-full.png" alt="LEMONADE by Lemonica" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" class="active">Home</a></li>
+      <li><a href="#">Resources</a></li>
+      <li><a href="#">Updates</a></li>
+      <li><a href="#">Training</a></li>
+      <li><a href="#">Operations</a></li>
+      <li><a href="#">Contacts</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-user">Olivier</span>
+      <span class="nav-badge">🔒 Private Portal</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <img src="logo-icon.png" class="hero-lemon-left" alt="" />
+    <img src="logo-icon.png" class="hero-lemon-right" alt="" />
+    <img src="logo-full.png" alt="LEMONADE by Lemonica" class="hero-logo" />
+    <p class="hero-sub">Europe Franchisee Portal</p>
+    <p class="hero-title">Citronnade Naturelle — <span>France & Europe</span></p>
+    <p class="hero-welcome">Welcome, Olivier. Everything you need to launch and operate is here.</p>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+    <div class="left-col">
+
+      <!-- About -->
+      <div class="about-card">
+        <div class="about-card-inner">
+          <img src="logo-icon.png" class="about-icon" alt="Lemonica icon" />
+          <p>A premium Japanese lemonade brand, born in 2017.<br />Now arriving in <strong>South France</strong> and across Europe.</p>
+        </div>
+        <a href="#" class="btn-link">About the Brand →</a>
+      </div>
+
+      <!-- Resource Library -->
+      <div class="section-header">
+        <div>
+          <h2>📁 Resource Library</h2>
+          <p>Download the latest approved materials and operational documents.</p>
+        </div>
+      </div>
+
+      <div class="resource-grid">
+        <div class="resource-card">
+          <div class="icon">🏗️</div>
+          <h3>Store Design Pack</h3>
+          <p>Interior drawings, kitchen layout</p>
+          <a href="#" class="btn-download">⬇ Download</a>
+        </div>
+        <div class="resource-card">
+          <div class="icon">🍳</div>
+          <h3>Kitchen Equipment List</h3>
+          <p>Approved equipment with model numbers</p>
+          <a href="#" class="btn-download">⬇ Download</a>
+        </div>
+        <div class="resource-card">
+          <div class="icon">🎨</div>
+          <h3>Logo & Brand Guidelines</h3>
+          <p>Logo files, colour palette, typography</p>
+          <a href="#" class="btn-download">⬇ Download</a>
+        </div>
+        <div class="resource-card">
+          <div class="icon">🍋</div>
+          <h3>Menu & Recipes</h3>
+          <p>Drinks, food, seasonal items</p>
+          <a href="#" class="btn-download">⬇ Download</a>
+        </div>
+        <div class="resource-card">
+          <div class="icon">📦</div>
+          <h3>HQ Supply Catalogue</h3>
+          <p>Syrups, core items, prices</p>
+          <a href="#" class="btn-download">⬇ Download</a>
+        </div>
+        <div class="resource-card">
+          <div class="icon">🥤</div>
+          <h3>Packaging Specifications</h3>
+          <p>Cups, lids, custom options</p>
+          <a href="#" class="btn-download">⬇ Download</a>
+        </div>
+        <div class="resource-card">
+          <div class="icon">🎓</div>
+          <h3>LMM Training Programme</h3>
+          <p>Schedule, materials</p>
+          <a href="#" class="btn-download">⬇ Download</a>
+        </div>
+        <div class="resource-card">
+          <div class="icon">📋</div>
+          <h3>Operations Manuals</h3>
+          <p>SOPs, opening checklists</p>
+          <a href="#" class="btn-download">⬇ Download</a>
+        </div>
+      </div>
+
+      <!-- WhatsApp Banner -->
+      <div class="whatsapp-banner">
+        <div class="whatsapp-banner-left">
+          <span class="whatsapp-icon">💬</span>
+          <div>
+            <h3>Questions? Reply via WhatsApp Official Group</h3>
+            <p>We're here to support you every step of the way.</p>
+          </div>
+        </div>
+        <a href="#" class="btn-join">Join group →</a>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <!-- Latest Updates -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">
+          <h3>Latest Updates</h3>
+          <span>🔔</span>
+        </div>
+
+        <div class="update-item">
+          <div class="update-icon">📄</div>
+          <div class="update-content">
+            <h4>Recent meeting minutes</h4>
+            <ul>
+              <li>France Master Franchisee Meeting</li>
+            </ul>
+            <div class="update-date">15 May 2026</div>
+            <a href="#" class="view-all">View all →</a>
+          </div>
+        </div>
+
+        <div class="update-item">
+          <div class="update-icon" style="background:#FFF3CD;">
+            <span class="badge-new">NEW</span>
+          </div>
+          <div class="update-content">
+            <h4>New documents this week</h4>
+            <ul>
+              <li>Store Design Pack – Version 2.1 <span class="update-date">(13 May 2026)</span></li>
+              <li>Menu & Recipes – Spring/Summer 2026 <span class="update-date">(12 May 2026)</span></li>
+            </ul>
+            <a href="#" class="view-all">View all →</a>
+          </div>
+        </div>
+
+        <a href="#" class="view-all">View all updates →</a>
+      </div>
+
+      <!-- Upcoming Milestones -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-header">
+          <h3>Upcoming Milestones</h3>
+          <span>📅</span>
+        </div>
+
+        <div class="milestone-item">
+          <div class="milestone-dot"></div>
+          <div>
+            <p>LMM Training: 4–18 June 2026</p>
+            <span>Nice, France</span>
+          </div>
+        </div>
+        <div class="milestone-item">
+          <div class="milestone-dot"></div>
+          <div>
+            <p>Store Opening Inspection</p>
+            <span>TBC</span>
+          </div>
+        </div>
+        <div class="milestone-item">
+          <div class="milestone-dot"></div>
+          <div>
+            <p>Q3 Franchise Review Meeting</p>
+            <span>September 2026</span>
+          </div>
+        </div>
+
+        <a href="#" class="view-all">View timeline →</a>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <strong>LEMONADE by Lemonica</strong>
+    <span>|</span>
+    Confidential — For Authorised Users Only
+    <span>|</span>
+    © 2026
+  </footer>
+
+</body>
+</html>
