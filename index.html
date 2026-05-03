@@ -762,13 +762,16 @@
       <img src="logo-icon.png" alt="LEMONADE by Lemonica" class="gate-logo" />
       <p class="gate-title">France Franchisee Portal<br>Private Access</p>
       <label class="gate-label">PASSWORD</label>
-      <input
-        type="password"
-        id="gate-input"
-        class="gate-input"
-        placeholder="Enter your password"
-        autocomplete="current-password"
-      />
+      <div class="gate-input-wrap">
+        <input
+          type="password"
+          id="gate-input"
+          class="gate-input"
+          placeholder="Enter your password"
+          autocomplete="current-password"
+        />
+        <button type="button" class="gate-toggle" onclick="togglePassword()" id="toggle-btn" title="Show / Hide password">👁</button>
+      </div>
       <button class="gate-btn" onclick="checkPassword()">Enter Portal &rarr;</button>
       <p class="gate-error" id="gate-error"></p>
       <p class="gate-footer">LEMONADE by Lemonica &mdash; Confidential</p>
@@ -872,6 +875,34 @@
     .gate-btn:hover { background: #e0b600; }
     .gate-btn:active { transform: scale(0.98); }
 
+    .gate-input-wrap {
+      position: relative;
+      margin-bottom: 14px;
+    }
+
+    .gate-input-wrap .gate-input {
+      margin-bottom: 0;
+      padding-right: 48px;
+      width: 100%;
+    }
+
+    .gate-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      opacity: 0.5;
+      padding: 0;
+      line-height: 1;
+      transition: opacity 0.2s;
+    }
+
+    .gate-toggle:hover { opacity: 1; }
+
     .gate-error {
       margin-top: 12px;
       font-size: 13px;
@@ -893,7 +924,7 @@
   </style>
 
   <script>
-    const CORRECT_PASSWORD = 'Lemonicafc2026';
+    const CORRECT_PASSWORD = 'LemonadeEurope2026';
     const SESSION_KEY = 'lemonica_portal_auth';
     const TIMEOUT_MS = 5 * 60 * 1000; // 5 minutes
     let logoutTimer;
@@ -915,6 +946,20 @@
       logoutTimer = setTimeout(() => {
         showGate();
       }, TIMEOUT_MS);
+    }
+
+    function togglePassword() {
+      const input = document.getElementById('gate-input');
+      const btn = document.getElementById('toggle-btn');
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🙈';
+        btn.style.opacity = '1';
+      } else {
+        input.type = 'password';
+        btn.textContent = '👁';
+        btn.style.opacity = '0.5';
+      }
     }
 
     function checkPassword() {
